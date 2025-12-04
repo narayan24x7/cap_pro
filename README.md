@@ -1,208 +1,184 @@
+# EcoSight: Gemini Vision Multi-Agent Waste Sorting System
+**AI-powered agents detect, classify, and automate waste sorting for optimized recycling efficiency.**
 
-# **EcoGuardian — Multi-Agent Waste Detection & Recycling Optimization**
+![EcoSight Banner](PATH_TO_BANNER_IMAGE)
 
-### *AI-powered visual detection + multi-agent routing system to improve recycling efficiency and reduce waste management costs*
 
-<img src="assets/thumbnail.png" width="760"/>
 
----
-
-## **📍 Submission Track**
-
-**Concierge / Autonomous Agents**
+[![Open Kaggle Notebook](https://img.shields.io/badge/Kaggle-Notebook-blue)](YOUR_KAGGLE_NOTEBOOK_LINK)  
 
 ---
 
-## **🚩 Problem Overview**
+## Table of Contents
 
-Cities worldwide struggle with inefficient waste collection logistics and poor recycling participation. Waste is often collected on fixed schedules rather than based on real demand, leading to:
-
-* unnecessary fuel and labor costs,
-* overflowing public bins,
-* low recycling capture rates,
-* environmental pollution & greenhouse gas emissions.
-
-Manual monitoring and planning are time-consuming, costly, and reactive instead of proactive.
-
----
-
-## **💡 Solution Summary**
-
-**EcoGuardian** is a **multi-agent system** that automatically:
-
-1. Detects and classifies waste items using computer vision,
-2. Computes optimal recycling pickup routes based on detections and location clustering,
-3. Generates public-friendly recycling recommendations using a Gemini-powered LLM,
-4. Maintains memory of historical pickup patterns to improve future route plans.
-
-The system demonstrates real AI-agent reasoning through orchestration, tool use, optimized workflows, and evaluation metrics.
+1. [Project Overview](#project-overview)  
+2. [Problem Statement](#problem-statement)  
+3. [Solution Statement](#solution-statement)  
+4. [Architecture](#architecture)  
+5. [Workflow Diagram & Demo](#workflow-diagram--demo)  
+6. [Test Results](#test-results)  
+7. [PDF Report Features](#pdf-report-features)  
+8. [Interactive PDF Preview](#interactive-pdf-preview)  
+9. [Technology Stack](#technology-stack)  
+10. [Code Organization](#code-organization)  
+11. [Challenges](#challenges)  
+12. [Future Enhancements](#future-enhancements)  
+13. [Value Statement](#value-statement)  
+14. [Links](#links)
 
 ---
 
-## **🎯 Value Proposition**
+## Project Overview
 
-| Stakeholder           | Benefit                                            |
-| --------------------- | -------------------------------------------------- |
-| City waste management | Reduced fuel/time costs through optimized routing  |
-| Environmental impact  | Less landfill volume & CO₂ emissions               |
-| Community             | Cleaner streets, better recycling participation    |
-| Operations teams      | Automated monitoring instead of manual inspections |
+**EcoSight** is a multi-agent system for automated waste detection, classification, and reporting. Using **Google Gemini Vision API**, it provides:
 
-**Results shown in demo**:
-
-* Improved route efficiency: *reduction in route length vs baseline static route (measured in meters/time)*
-* Improved sorting accuracy: *Precision / Recall / F1 for waste detection & category classification*
+- Real-time object detection  
+- Classification based on local recycling regulations  
+- Personalized disposal guidance  
+- Quantified environmental impact  
 
 ---
 
-## **🏗 System Architecture**
+## Problem Statement
 
+- **Classification Confusion:** Users struggle with local recycling rules.  
+- **Contamination:** Non-recyclables reduce efficiency by 25–30%.  
+- **Information Fragmentation:** Disposal guidelines vary widely.  
+- **Lack of Feedback:** Users don’t know their impact.  
+
+**EcoSight** addresses these challenges with a single-image capture workflow.
+
+---
+
+## Solution Statement
+
+- **Specialized Expertise:** Separate agents for vision, classification, reporting.  
+- **Scalable Modularity:** New features added without rebuilding.  
+- **Parallel Processing:** Real-time batch analysis.  
+- **Context Preservation:** Personalized recommendations via session memory.  
+- **Adaptive Intelligence:** Graceful degradation if one component fails.
+
+---
+
+## Architecture
+
+**Layers:**
+
+1. **Vision Analysis Layer:** Gemini Vision API + Mock fallback.  
+2. **Classification & Location Intelligence:** WasteDB + LocationFinder.  
+3. **Memory & Personalization:** MemoryBank stores user history.  
+4. **Reporting & Output Generation:** PDF generator + interactive downloader.
+
+---
+
+## Workflow Diagram & Demo
+
+**Workflow:**  
+
+![EcoSight Workflow GIF](PATH_TO_GIF)  
+
+
+**Steps:**  
+1. Upload/capture image  
+2. Vision Agent detects items  
+3. Classification Agent categorizes items  
+4. Reporting Agent generates PDF  
+
+[Watch Full Demo on YouTube](YOUR_YOUTUBE_LINK)
+
+---
+
+## Test Results
+
+**Dataset:** TrashNet (2,527 images, 6 categories)  
+
+**Single Image:**  
+- Detection: 2 items (glass, paper)  
+- Classification: 100% recyclable  
+- Processing time: ~2 seconds  
+- PDF size: 6.4 KB  
+
+**Bulk Test:**  
+- Processed 4 images in parallel  
+- Success rate: 100%  
+- Average recyclable rate: 62.5%  
+- Total items detected: 5  
+- Parallel execution significantly faster than sequential  
+
+---
+
+## PDF Report Features
+
+- Cover page with session ID, timestamp, model version  
+- Executive summary (recyclable %, CO₂, water, energy saved)  
+- Waste composition & detailed item analysis  
+- Environmental impact assessment & AI recommendations  
+- Interactive dashboard with live preview, downloads, and print
+
+---
+
+## Interactive PDF Preview
+
+You can embed your PDF directly (works in GitHub Pages, Notebooks, or HTML viewers):
 ```
-┌─────────────────────────────────────────────────────────┐
-│                     Coordinator Agent                    │
-│                      (A2A Orchestrator)                 │
-└───────────────┬─────────────────────────────┬───────────┘
-                │                             │
-                ▼                             ▼
-     ┌──────────────────┐          ┌─────────────────────┐
-     │ Detection Agent  │   --->   │ Classification Agent │
-     │ (Parallel CV)    │          │ (Refinement Loop)   │
-     └──────────────────┘          └─────────────────────┘
-                │                             │
-                └──────────────┬──────────────┘
-                               ▼
-                     ┌─────────────────────┐
-                     │ Routing Agent       │
-                     │ (Optimization tool) │
-                     └─────────────────────┘
-                               │
-                               ▼
-                     ┌─────────────────────┐
-                     │ Recommender Agent   │
-                     │ (Gemini LLM)        │
-                     └─────────────────────┘
+<iframe src="PATH_TO_PDF" width="100%" height="600px">
+  <p>Your browser does not support PDFs. 
+  <a href="PATH_TO_PDF">Download the PDF</a>.</p>
+</iframe>
 ```
-
 ---
 
-## **🧠 Agent Concepts Demonstrated (Required ≥3 — we include 5+)**
+## Technology Stack
 
-| Concept                                             | Usage in project                                                                                  |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **Multi-Agent System** (parallel, sequential, loop) | Detection Agents run parallel inference; classification sequential refinement loop; routing agent |
-| **Tools (custom + built-in)**                       | `image_infer_tool`, `route_optimizer_tool`, Code execution tool                                   |
-| **Sessions & Memory**                               | InMemorySessionService + Memory Bank to store pickup history                                      |
-| **Long-running operations**                         | Routing scheduler can pause/resume processing                                                     |
-| **Observability & Evaluation**                      | Logging, inference timing, precision/recall, route-efficiency metrics                             |
+- Python 3.11, AsyncIO, Pydantic
+- Google Gemini Vision API, google-genai SDK
+- Pillow, TrashNet dataset, WasteDB
+- ReportLab, IPython.display
+- Kaggle Notebooks for development
 
-**Bonus:**
-
-* Gemini model for recommendation generation
-* Optional deployment via Agent Engine / Cloud Run
-* Short 3-minute demo video (linked below)
-
----
-
-## **📊 Evaluation & Metrics**
-
-| Metric                             | Description                                       |
-| ---------------------------------- | ------------------------------------------------- |
-| Precision / Recall / F1            | Accuracy of detection and category classification |
-| mAP                                | Object recognition performance                    |
-| Route efficiency (Δdistance saved) | Optimized route vs baseline static route          |
-| System latency                     | Image-to-decision total time                      |
-
-Example Dashboard Output:
-
-* Annotated detection results
-* Routing path visualization
-* Charts showing time/distance reduction
-
----
-
-## **📦 Project Structure**
-
+## Code Organization
 ```
-EcoGuardian/
-│
-├── notebooks/
-│   └── EcoGuardian_demo.ipynb
-│
-├── src/
-│   ├── agents/
-│   │   ├── detection_agent.py
-│   │   ├── routing_agent.py
-│   │   ├── recommender_agent.py
-│   │   └── coordinator.py
-│   └── tools/
-│       ├── image_infer_tool.py
-│       └── route_optimizer_tool.py
-│
-├── data/              # Sample dataset images
-├── tests/             # evaluation scripts
-├── assets/            # thumbnail, diagrams
-└── README.md
-```
-
----
-
-## **🧪 How to Run**
-
-### **Option A: Kaggle Notebook**
-
-Open and execute `EcoGuardian_demo.ipynb`
-*All dependencies auto-installed.*
-
-### **Option B: Local Setup**
-
-```bash
-git clone <repo-url>
-cd EcoGuardian
-pip install -r requirements.txt
-python src/run_demo.py
+EcoSight/
+├── agents/
+│   ├── vision_agent.py
+│   ├── classification_agent.py
+│   └── reporting_agent.py
+├── tools/
+│   ├── vision_provider.py
+│   ├── waste_db.py
+│   ├── location_finder.py
+│   └── pdf_generator.py
+├── memory/
+│   └── memory_bank.py
+├── orchestration/
+│   └── orchestrator.py
+└── utils/
+    └── pdf_downloader.py
 ```
 
-### **Dataset**
-
-Uses public waste detection dataset(s) with proper licensing; referenced in notebook.
-
----
-
-## **🎥 Demo Video**
-
-👉 *3-minute walkthrough with architecture, demo, and results*
-[YouTube Demo Link]()
+## Challenges
+- Color Conversion in PDF: Patched Color.toHex() for RGB conversion
+- TrashNet Dataset Access: Implemented fallback paths
 
 ---
 
-## **🚀 Deployment (Optional / Bonus)**
-
-The project includes instructions to deploy inference and routing orchestration using:
-
-* **Agent Engine**
-* **Cloud Run**
-  (Documentation in `/deployment` folder)
-
----
-
-## **🔮 Future Enhancements**
-
-* Real-time camera integration
-* GPS-driven pickup maps
-* Predictive modeling based on seasonal patterns
-* Integration with municipal dashboards
+## Future Enhancements
+- Gemini 1.5 Flash integration
+- Persistent database backend
+- FastAPI + React web interface
+- Barcode scanning, gamification, AR visualization
+- Multi-language support, enterprise dashboards, mobile apps
 
 ---
 
-## **🙌 Acknowledgements**
+## Value Statement
 
-* Kaggle AI Agentic Course team
-* Model/dataset authors
-* Open-source contributors
+EcoSight demonstrates how multi-agent AI systems can transform environmental sustainability, making recycling effortless, accurate, and rewarding.
 
 ---
 
-## **📄 License**
+## Links
 
-MIT License (except datasets which follow their own licensing terms)
-
+- 📺 YouTube Demo
+- 📓 Kaggle Notebook
+  
