@@ -174,4 +174,4 @@ EcoSight demonstrates how multi-agent AI systems can transform environmental sus
 
 - [📺 YouTube Demo](https://www.youtube.com/watch?v=G3UFc_O710k)
 - [📓 Kaggle Notebook](https://www.kaggle.com/code/janviraj/ecosight-gemini-vision-multi-agent-waste-sorting/notebook)
-  
+ 
